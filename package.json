@@ -1,0 +1,19 @@
+{
+  "name": "joblist_api",
+  "version": "1.0.0",
+  "description": "An api for job list with methods GET, POST, PUT and Delete",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/getssh/TechUp_sprint5.git"
+  },
+  "author": "Getayawkal",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/getssh/TechUp_sprint5/issues"
+  },
+  "homepage": "https://github.com/getssh/TechUp_sprint5#readme"
+}
