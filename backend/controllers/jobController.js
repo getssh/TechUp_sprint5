@@ -31,7 +31,7 @@ const setJob = asyncHandler(async (req, res) => {
     res.status(201).json(job);
   } catch (err) {
     res.status(400)
-    throw new Error('Please add the data')
+    throw new Error('Missed required feiled or Wrong data type')
   }
 })
 
