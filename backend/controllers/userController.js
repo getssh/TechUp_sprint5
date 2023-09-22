@@ -93,9 +93,32 @@ const getUser = asyncHandler(async (req, res) => {
   }
 });
 
+const getAllUsers = asyncHandler(async (req, res) => {
+  try {
+    const users = await User.find();
+
+    if (!users || users.length === 0) {
+      return res.status(404).json({ message: 'No users found' });
+    }
+
+    const mappedUsers = users.map((user) => ({
+      _id: user._id,
+      username: user.username,
+      email: user.email,
+      role: user.role,
+    }));
+
+    res.status(200).json(mappedUsers);
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
+
 module.exports = {
   createUser,
   updateUser,
   deleteUser,
   getUser,
+  getAllUsers,
 };
