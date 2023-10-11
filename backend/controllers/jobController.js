@@ -88,9 +88,27 @@ const deleteJob = asyncHandler(async (req, res) => {
   }
 })
 
+const getJob = asyncHandler(async (req, res) => {
+  const jobId = req.params.id;
+
+  try {
+    const job = await Job.findById(jobId);
+
+    if (!job) {
+      return res.status(404).json({ message: 'Job not found' });
+    }
+
+    // const { _id, username, email, role } = job;
+    res.status(200).json({ job });
+  } catch (error) {
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
+
 module.exports = {
   getJobs,
   setJob,
   updateJob,
   deleteJob,
+  getJob,
 }
