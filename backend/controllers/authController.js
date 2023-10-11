@@ -46,7 +46,7 @@ const loginUser = asyncHandler(async (req, res) => {
       expiresIn: '7d',
     });
 
-    res.status(200).json({ message: 'Login successful', id: user.id, token });
+    res.status(200).json({ message: 'Login successful', id: user.id, role: user.role, token });
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
   }

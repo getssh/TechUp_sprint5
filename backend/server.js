@@ -14,7 +14,7 @@ app.use(express.urlencoded({extended: false}))
 const cors = require('cors');
 
 app.use(cors({
-  origin: 'http://localhost:8080',
+  origin: 'http://172.20.141.64:8080',
   methods: 'GET,POST,PUT,DELETE',
   credentials: true,
 }));
