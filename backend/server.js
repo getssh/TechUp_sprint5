@@ -11,6 +11,13 @@ const app = express()
 
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'http://localhost:8080',
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true,
+}));
 
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/users', require('./routes/userRoutes'));
