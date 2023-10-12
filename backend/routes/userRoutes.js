@@ -6,7 +6,7 @@ const { authMiddleware, superAdminMiddleware } = require('../middleware/authMidd
 router.post('/', authMiddleware, superAdminMiddleware, createUser);
 router.put('/:id', authMiddleware, superAdminMiddleware, updateUser);
 router.delete('/:id', authMiddleware, superAdminMiddleware, deleteUser);
-router.get('/me', authMiddleware, getUser);
+router.get('/:id', authMiddleware, superAdminMiddleware, getUser);
 router.get('/', authMiddleware, superAdminMiddleware, getAllUsers);
 
 module.exports = router;

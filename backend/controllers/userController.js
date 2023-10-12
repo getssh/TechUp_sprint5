@@ -24,33 +24,49 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
-
 const updateUser = asyncHandler(async (req, res) => {
   if (req.user.role !== 'superadmin') {
     return res.status(403).json({ message: 'Permission denied' });
   }
-
-  const userIdToUpdate = req.params.id;
-  const { username, email, role } = req.body;
-  console.log(req.body);
   try {
-    const userToUpdate = await User.findById(userIdToUpdate);
-    if (!userToUpdate) {
-      return res.status(404).json({ message: 'User not found' });
-    }
-
-    userToUpdate.username = username;
-    userToUpdate.email = email;
-    userToUpdate.role = role;
-
-    await userToUpdate.save();
-
-    res.status(200).json({ message: 'User updated successfully' });
-  } catch (error) {
-    console.error('Error in updateUser:', error);
-    res.status(500).json({ message: 'Internal Server Errorr' });
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json({
+      username: user.username,
+      email: user.email,
+      password: '*****',
+      role: user.role,
+    });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
-});
+})
+
+// const updateUser = asyncHandler(async (req, res) => {
+//   if (req.user.role !== 'superadmin') {
+//     return res.status(403).json({ message: 'Permission denied' });
+//   }
+
+//   const userIdToUpdate = req.params.id;
+//   const { username, email, role } = req.body;
+//   console.log(req.body);
+//   try {
+//     const userToUpdate = await User.findById(userIdToUpdate);
+//     if (!userToUpdate) {
+//       return res.status(404).json({ message: 'User not found' });
+//     }
+
+//     userToUpdate.username = username;
+//     userToUpdate.email = email;
+//     userToUpdate.role = role;
+
+//     await userToUpdate.save();
+
+//     res.status(200).json({ message: 'User updated successfully' });
+//   } catch (error) {
+//     console.error('Error in updateUser:', error);
+//     res.status(500).json({ message: 'Internal Server Errorr' });
+//   }
+// });
 
 
 const deleteUser = asyncHandler(async (req, res) => {
@@ -77,7 +93,7 @@ const deleteUser = asyncHandler(async (req, res) => {
 
 
 const getUser = asyncHandler(async (req, res) => {
-  const userId = req.user._id;
+  const userId = req.params.id;
 
   try {
     const user = await User.findById(userId);
