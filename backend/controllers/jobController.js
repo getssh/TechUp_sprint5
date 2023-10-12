@@ -98,8 +98,20 @@ const getJob = asyncHandler(async (req, res) => {
       return res.status(404).json({ message: 'Job not found' });
     }
 
-    // const { _id, username, email, role } = job;
-    res.status(200).json({ job });
+    // const { _id, company, logo, , featured,  } = job;
+    res.status(200).json({
+      company: job.company,
+      logo: job.logo,
+      new: job.new,
+      featured: job.featured,
+      position: job.position,
+      role: job.role,
+      level: job.level,
+      contract: job.contract,
+      location: job.location,
+      languages: job.languages,
+      tools: job.tools,
+    });
   } catch (error) {
     res.status(500).json({ message: 'Internal Server Error' });
   }
